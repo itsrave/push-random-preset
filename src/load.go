@@ -11,6 +11,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -21,6 +22,31 @@ type presetEntry struct {
 	Name     string `json:"name"`
 	Category string `json:"category"`
 	Path     string `json:"path"`
+}
+
+// deviceParam is the "&device=<sticky category>" query fragment, or "" for Any.
+func deviceParam(kind string) string {
+	if d := getFilter(kind); d != "" {
+		return "&device=" + url.QueryEscape(d)
+	}
+	return ""
+}
+
+// fetchCategories returns push-manager's `device` facet values for a coarse
+// category (Instruments / Drums) — the browsable sub-groupings the menu offers.
+func fetchCategories(pmURL, category string) ([]string, error) {
+	resp, err := httpClient.Get(pmURL + "/api/presets/facets")
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	var body struct {
+		DevicesByCategory map[string][]string `json:"devices_by_category"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
+		return nil, err
+	}
+	return body.DevicesByCategory[category], nil
 }
 
 func fetchPresets(pmURL, query string) ([]presetEntry, error) {
@@ -54,20 +80,22 @@ func realDrumRacks(in []presetEntry) []presetEntry {
 	return out
 }
 
-// loadRandom loads a random preset or drum rack onto the selected track.
+// loadRandom loads a random preset or drum rack onto the selected track,
+// honouring the sticky category filter set via the menu (getFilter).
 func loadRandom(pmURL, kind string) {
 	var presets []presetEntry
 	var err error
+	dev := deviceParam(kind)
 
 	switch kind {
 	case "drumrack":
-		presets, err = fetchPresets(pmURL, "type=preset&filter=Drums&rack=rack")
+		presets, err = fetchPresets(pmURL, "type=preset&filter=Drums&rack=rack"+dev)
 		if err == nil {
 			presets = realDrumRacks(presets)
 		}
 	default: // "preset"
-		presets, err = fetchPresets(pmURL, "type=preset&filter=Instruments")
-		if err == nil && len(presets) == 0 {
+		presets, err = fetchPresets(pmURL, "type=preset&filter=Instruments"+dev)
+		if err == nil && len(presets) == 0 && dev == "" {
 			presets, err = fetchPresets(pmURL, "type=preset") // fall back to any preset
 		}
 	}
