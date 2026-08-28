@@ -36,9 +36,9 @@ const (
 // "drumrack" string chord.go fires with.
 func kindFacet(kind string) (category, title string) {
 	if kind == "drumrack" {
-		return "Drums", "RANDOM · DRUMS"
+		return "Drums", "RANDOM - DRUMS"
 	}
-	return "Instruments", "RANDOM · SOUNDS"
+	return "Instruments", "RANDOM - SOUNDS"
 }
 
 // deviceFilter is the sticky per-kind category ("" = Any). loadRandom reads it.
@@ -229,7 +229,7 @@ func renderMenu(pm *pmclient.Client, title, kind string, rows []string, cursor, 
 		Rows:       lr,
 		Cursor:     cursor,
 		Scroll:     scroll,
-		Breadcrumb: "Turn jog to scroll · click OK · left = back",
+		Breadcrumb: "Turn jog to scroll - click OK - left = back",
 		Status:     status,
 	}, menuTopH, push3.VisW, menuRowH, push3.VisH)
 
