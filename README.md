@@ -5,6 +5,20 @@ Two Push 3 chords that drop something random onto the selected track:
 - **Shift + Add** (CC49+CC32) → a random **preset** (prefers Instruments)
 - **Shift + Swap** (CC49+CC33) → a random **drum rack kit**
 
+Add **Select** to either chord to first pick a category:
+
+- **Shift + Select + Add** → on-screen menu of instrument categories
+- **Shift + Select + Swap** → on-screen menu of drum categories
+
+The menu is drawn on Push's display (like push-manager's catalogue) and driven
+by the **jog wheel**: turn to scroll, click-right or press to pick, click-left
+to cancel. Categories are push-manager's per-category `device` facet (from
+`/api/presets/facets` — instrument devices / drum-rack families; not Live's
+semantic "Sounds" tags, which push-manager doesn't index). Picking one loads a
+random preset from it *and* makes it sticky, so the plain Shift+Add / Shift+Swap
+chords keep pulling from that category until you change it. The top **Any** entry
+clears the filter. The menu auto-dismisses after 15s.
+
 A hack for [`push-hack`](https://github.com/federico-pepe/ableton-push-hack)
 (Push 3's on-device hack framework) — install it via that repo's `push-store`
 hack, or build and deploy it yourself, see "Build & deploy" below.

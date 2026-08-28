@@ -26,8 +26,8 @@ func main() {
 		pmURL = "http://localhost:7701"
 	}
 
-	log.Printf("random-preset: Shift+Add (CC%d+CC%d)->random preset, Shift+Swap (CC%d+CC%d)->random drum rack, via %s",
-		ccShift, ccAdd, ccShift, ccSwap, pmURL)
+	log.Printf("random-preset: Shift+Add->random preset, Shift+Swap->random drum rack; "+
+		"add Select (Shift+Select+Add / +Swap) to pick a category on screen; via %s", pmURL)
 	waitForBootSettle()
 	runMidiIn(pmURL) // blocks forever
 }

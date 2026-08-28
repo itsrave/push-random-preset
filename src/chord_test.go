@@ -44,6 +44,18 @@ func TestChordsFireIndependently(t *testing.T) {
 	}
 }
 
+func TestSelectOpensMenuNotLoad(t *testing.T) {
+	resetChord()
+	t0 := time.Now()
+	fired(ccShift, 127, t0)
+	fired(ccSelect, 127, t0.Add(5*time.Millisecond))
+	// Shift+Select+Add -> the preset menu, flagged menu=true, and no load.
+	got := firedChords(ccAdd, 127, t0.Add(10*time.Millisecond))
+	if len(got) != 1 || got[0].kind != "preset" || !got[0].menu {
+		t.Fatalf("Shift+Select+Add fired %v, want one preset menu", got)
+	}
+}
+
 func TestChordDebouncePerTrigger(t *testing.T) {
 	resetChord()
 	t0 := time.Now()
