@@ -1,0 +1,5 @@
+build/
+random-preset
+build-test
+*.log
+.DS_Store
