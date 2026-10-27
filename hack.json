@@ -1,7 +1,7 @@
 {
   "id": "random-preset",
   "name": "Random Preset",
-  "description": "Shift+Add loads a random preset; Shift+Swap loads a random drum rack kit — onto the selected track. Add Select (Shift+Select+Add / +Swap) to pick a category on screen with the jog wheel. REQUIRES push-manager + browser-bridge (PushHackBrowser activated in Live).",
+  "description": "Shift+Add loads a random preset; Shift+Swap loads a random drum rack kit — onto the selected track. Add Select (Shift+Select+Add / +Swap) to pick a category on screen with the jog wheel. REQUIRES push-manager and the PushHack Remote Script (selected in a control-surface slot in Live).",
   "version": "0.2.1",
   "author": "itsrave",
   "binary": "random-preset",
