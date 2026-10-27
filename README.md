@@ -20,20 +20,22 @@ chords keep pulling from that category until you change it. The top **Any** entr
 clears the filter. The menu auto-dismisses after 15s.
 
 A hack for [`push-hack`](https://github.com/federico-pepe/ableton-push-hack)
-(Push 3's on-device hack framework) — install it via that repo's `push-store`
-hack, or build and deploy it yourself, see "Build & deploy" below.
+(Push 3's on-device hack framework) — install it via that repo's Push Hack
+Catalog, or build and deploy it yourself, see "Build & deploy" below.
 
 ## Requirements
 
-**Needs the `push-hack` framework's `push-manager` and `browser-bridge` hacks
-also installed and running** (from
-[federico-pepe/ableton-push-hack](https://github.com/federico-pepe/ableton-push-hack)).
+**Needs the `push-hack` framework's `push-manager` installed and running,
+and the PushHack Remote Script** (both come with
+[federico-pepe/ableton-push-hack](https://github.com/federico-pepe/ableton-push-hack);
+the separate `browser-bridge` hack is retired).
 This hack never loads presets itself: it reads push-manager's preset index and
-asks it to load onto the selected track, which push-manager forwards to
-browser-bridge (the only thing that can instantiate a preset in Live). The
-**PushHackBrowser** remote script must be activated in Live (browser-bridge's
-one-time setup). If a load silently no-ops, that's the first thing to check —
-the reason is logged to `/data/push-hack/logs/random-preset.log`.
+asks it to load onto the selected track, which push-manager forwards to the
+PushHack Remote Script (the only thing that can instantiate a preset in Live).
+**PushHack** must be selected once in a control-surface slot in Live's
+Preferences (Input and Output: None), then Live restarted. Push Manager's System
+page shows if it runs. If a load silently no-ops, that's the first thing to
+check — the reason is logged to `/data/push-hack/logs/random-preset.log`.
 
 ## How it works
 
@@ -53,10 +55,10 @@ grid's Note On/Off, so the pads keep playing into Live normally.
 
 ## Build & deploy
 
-**Via Push Store (recommended):** install `push-hack`'s `push-manager` +
-`browser-bridge` + `push-store` hacks first, then install this one from
-`push-store`'s web UI (or the on-device STORE tab) — it's listed in
-[ableton-push-hack's catalogue](https://github.com/federico-pepe/ableton-push-hack/blob/main/catalogue/catalog.json).
+**Via the Push Hack Catalog (recommended):** install `push-hack` first
+(`push-manager` + the PushHack Remote Script), then install this one from the
+Catalog's web UI (or the on-device CATALOG tab) — it's listed in
+[ableton-push-hack's catalog](https://github.com/federico-pepe/ableton-push-hack/blob/main/catalog/catalog.json).
 
 **Manually**, from a clone of this repo:
 ```bash

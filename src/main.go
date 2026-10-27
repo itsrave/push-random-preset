@@ -2,10 +2,10 @@
 // selected track. A background daemon: no HTTP server, no display. It watches
 // Push 3's hardware MIDI for the Shift+Add chord (mirroring keyboard-visualizer's
 // independent chord watch) and, on fire, asks push-manager to load a random
-// preset (push-manager forwards to browser-bridge, which drives Live's browser).
+// preset (push-manager forwards to the PushHack Remote Script, which drives Live's browser).
 //
-// Requires push-manager (:7701, preset index + /api/live/load) and browser-bridge
-// (the PushHackBrowser remote script, activated in Live).
+// Requires push-manager (:7701, preset index + /api/live/load) and the PushHack
+// Remote Script (ships with Push Hack, selected in a control-surface slot in Live).
 package main
 
 import (

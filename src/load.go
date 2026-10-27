@@ -110,7 +110,7 @@ func loadRandom(pmURL, kind string) {
 
 	p := presets[rand.Intn(len(presets))]
 	if err := livePost(pmURL, p); err != nil {
-		log.Printf("load: %q: %v (is browser-bridge's PushHackBrowser script activated in Live?)", p.Name, err)
+		log.Printf("load: %q: %v (is the PushHack Remote Script selected in Live?)", p.Name, err)
 		return
 	}
 	log.Printf("load: %s -> %q (%s)", kind, p.Name, p.Category)
